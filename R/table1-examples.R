@@ -81,3 +81,38 @@ tbl_summary(
   modify_header(label = "**Variable**", p.value = "**P**")
 
 
+
+
+
+
+tbl_summary(
+	nlsy,
+	by = sex_cat,
+	include = c(
+		sex_cat, race_eth_cat,
+		eyesight_cat, glasses, age_bir
+	),
+	label = list(
+		race_eth_cat ~ "Race/ethnicity",
+		eyesight_cat ~ "Eyesight",
+		glasses ~ "Wears glasses",
+		age_bir ~ "Age at first birth"
+	),
+	missing_text = "Missing"
+) |>
+	# change the test used to compare sex_cat groups
+	add_p(test = list(
+		all_continuous() ~ "t.test",
+		all_categorical() ~ "chisq.test"
+	)) |>
+	# add a total column with the number of observations
+	add_overall(col_label = "**Total** N = {N}") |>
+	bold_labels() |>
+	# remove the default footnotes
+	modify_footnote(update = everything() ~ NA) |>
+	# replace the column headers and make them bold
+	modify_header(label = "**Variable**", p.value = "**P**")
+	# replace the column headers and make them bold
+
+
+
