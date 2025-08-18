@@ -131,4 +131,65 @@ tbl_merge(list(tbl_no_int, tbl_int),
   tab_spanner = c("**Model 1**", "**Model 2**")
 )
 
+###my code
+#one x multiple y's
+tbl_uvregression(
+	nlsy,
+	x = sex_cat,
+	include = c(
+		nsibs, sleep_wkdy,
+		sleep_wknd, income
+	),
+	method = lm
+)
 
+poisson_model <- glm(nsibs ~ eyesight_cat + sex_cat + glasses,
+											data = nlsy, family = poisson()
+)
+
+tbl_regression(
+	poisson_model,
+	# include the intercept
+	intercept = TRUE,
+	# relabel the variables
+	label = list(
+		sex_cat ~ "Sex",
+		eyesight_cat ~ "Eyesight",
+		glasses ~ "Glasses"
+	)
+)
+
+
+
+logistic_glasses <- glm(glasses ~ eyesight_cat + sex_cat,
+											data = nlsy, family = binomial(link = "log"))
+
+logistic_glasses_or <- glm(glasses ~ eyesight_cat + sex_cat,
+												data = nlsy, family = binomial())
+
+tbl_regression(
+	logistic_glasses,
+	exponentiate = TRUE,
+	label = list(
+		sex_cat ~ "Sex",
+		eyesight_cat ~ "Eyesight"
+	))
+
+###combine into one table
+gt_r1 <- glm(glasses ~ eyesight_cat + sex_cat, nlsy, family = binomial()) |>
+	tbl_regression(exponentiate = TRUE)
+gt_r2 <- glm(glasses ~ eyesight_cat + sex_cat, nlsy, family = binomial(link = "log")) |>
+	tbl_regression(exponentiate = TRUE)
+
+gt_t1 <- nlsy |>
+	tbl_summary(include = c(sex_cat, eyesight_cat), missing = "no") |>
+	add_n() |>
+	modify_header(stat_0 = "**n (%)**") |>
+	remove_footnote_header(stat_0)
+
+theme_gtsummary_compact()
+#> Setting theme "Compact"
+tbl_merge(
+	list(gt_t1, gt_r1, gt_r2),
+	tab_spanner = c(NA_character_, "**Odds Ratios**", "**Risk Ratios**")
+)
