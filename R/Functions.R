@@ -35,3 +35,13 @@ raise <- function(x, y) {
 
 raise(5, 6)
 5^6
+
+raise2 <- function(x, y=2) {
+	raise_value2 <- x^y
+	return(raise_value2)
+}
+
+raise2(4, 4)
+raise2(4)
+
+
