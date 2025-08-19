@@ -82,11 +82,12 @@ The median amount of sleep on the weekends was  `r median(nlsy$sleep_wknd, na.rm
 table1 <- tbl_summary(
   nlsy,
   include = c(sex_cat, race_eth_cat, region_cat,
-              eyesight_cat, glasses, age_bir, sleep_wknd)) |> 
-  add_overall(last = TRUE)
+              eyesight_cat, glasses, age_bir, sleep_wknd))
 table1
 ```
 
-inline_text(table1, variable = "age_bir", column = "stat_1")
+```{r}
+inline_text(table1, variable = "sleep_wknd")
+```
 
 The overall median number of hours of sleep was (`r inline_text(table1, variable = "sleep_wknd")`).
