@@ -104,5 +104,25 @@ table_sex_sleep<-tbl_summary(
 table_sex_sleep
 inline_text(table_sex_sleep, variable = "sleep_wknd", column = "stat_1")
 inline_text(table_sex_sleep, variable = "eyesight_cat", level = "Excellent", column = "stat_0")
+
+excellent_eyesight <- inline_text(table_sex_sleep, variable = "eyesight_cat", level = "Excellent",
+																	column = "stat_0")
+
+#new table, filtering by people with glassses
+nlsy <- filter(nlsy, glasses == 1)
+table_sex_sleep<-tbl_summary(
+	nlsy,
+	by = sex_cat,
+	include = c(sleep_wknd, race_eth_cat, region_cat, eyesight_cat, glasses, age_bir)) |>
+		add_overall()
+
+table_sex_sleep
+inline_text(table_sex_sleep, variable = "sleep_wknd", column = "stat_1")
+inline_text(table_sex_sleep, variable = "eyesight_cat", level = "Excellent", column = "stat_0")
+
+excellent_eyesight <- inline_text(table_sex_sleep, variable = "eyesight_cat", level = "Excellent",
+																	column = "stat_0")
+
 ```
+`r excellent_eyesight` people had excellent eyesight.
 
