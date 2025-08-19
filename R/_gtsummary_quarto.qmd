@@ -53,6 +53,9 @@ tbl_summary(
 ```
 
 ```{r}
+#| label: tbl-one
+#| tbl-cap: "This is a great table"
+
 tbl_summary(
   nlsy,
   by = sex_cat,
@@ -60,3 +63,14 @@ tbl_summary(
               eyesight_cat, glasses, age_bir))
 ```
 
+```{r}
+mean_sleep <- mean(nlsy$sleep_wknd, na.rm = TRUE)
+median_sleep <- median(nlsy$sleep_wknd, na.rm = TRUE)
+```
+I want to add `r 3+4` participants.
+
+The average amount of sleep on the weekends was `r mean_sleep` hours.
+The median amount of sleep on the weekends was `r median_sleep` hours.
+
+The average amount of sleep on the weekends was  `r mean(nlsy$sleep_wknd, na.rm = TRUE)` 
+The median amount of sleep on the weekends was  `r median(nlsy$sleep_wknd, na.rm = TRUE)` 
