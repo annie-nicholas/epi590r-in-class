@@ -91,3 +91,18 @@ inline_text(table1, variable = "sleep_wknd")
 ```
 
 The overall median number of hours of sleep was (`r inline_text(table1, variable = "sleep_wknd")`).
+
+```{r}
+#| label: tbl-sleep
+#| tbl-cap: "descriptive statistics stratified by sex with sleep"
+table_sex_sleep<-tbl_summary(
+	nlsy,
+	by = sex_cat,
+	include = c(sleep_wknd, race_eth_cat, region_cat, eyesight_cat, glasses, age_bir)) |>
+		add_overall()
+
+table_sex_sleep
+inline_text(table_sex_sleep, variable = "sleep_wknd", column = "stat_1")
+inline_text(table_sex_sleep, variable = "eyesight_cat", level = "Excellent", column = "stat_0")
+```
+
