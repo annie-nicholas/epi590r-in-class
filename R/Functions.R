@@ -45,3 +45,34 @@ raise2(4, 4)
 raise2(4)
 
 
+stddev <- function(x) {
+	n <- length(x)
+	m <- mean(x)
+	d <- (m - x)^2
+	stddev <- sqrt(sum(d)/(n-1))
+	if(n<=1) {stddev = NA}
+	return(stddev)
+}
+
+x <- c(1, 2, 5, 6, 7)
+stddev(x)
+
+sd(x)
+
+stddev(nlsy$R0217900)
+sd(nlsy$R0217900)
+
+stddev(2)
+
+
+stddev3 <- function(x) {
+	c <- na.omit(x)
+	n <- length(c)
+	m <- mean(c)
+	d <- (m - c)^2
+	stddev <- sqrt(sum(d)/(n-1))
+	if(n<=1) {stddev = NA}
+	return(stddev2)
+}
+
+stddev3(nlsy$R0217900)
