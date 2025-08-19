@@ -2,8 +2,7 @@
 title: "gtsummary in quarto"
 format: 
   html:
-    theme:
-      dark: darkly
+    theme: yeti
 execute:
   eval: true
   echo: false
