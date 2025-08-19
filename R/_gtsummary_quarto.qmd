@@ -9,6 +9,7 @@ execute:
 ---
 
 ```{r}
+#| message: FALSE
 #| echo: FALSE
 library(tidyverse)
 library(gtsummary)
