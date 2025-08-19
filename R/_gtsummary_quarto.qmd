@@ -51,3 +51,13 @@ tbl_summary(
   ),
   missing_text = "Missing")
 ```
+
+```{r}
+#| error: true
+tbl_summary(
+  NLSY,
+  by = sex_cat,
+  include = c(sex_cat, race_eth_cat, region_cat,
+              eyesight_cat, glasses, age_bir))
+```
+
