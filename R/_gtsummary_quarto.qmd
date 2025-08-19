@@ -2,7 +2,8 @@
 title: "gtsummary in quarto"
 format: html
 execute:
-	echo: false
+  eval: true
+  echo: false
 ---
 
 ```{r}
